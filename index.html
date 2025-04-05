@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas Barton – Fotogalerie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Thomas Barton</h1>
+    <p>Fotograf aus Frankfurt am Main</p>
+  </header>
+
+  <main class="gallery">
+    <img src="foto1.jpg" alt="Foto 1" onclick="openLightbox(0)">
+    <img src="foto2.jpg" alt="Foto 2" onclick="openLightbox(1)">
+    <img src="foto3.jpg" alt="Foto 3" onclick="openLightbox(2)">
+  </main>
+
+  <div class="lightbox" id="lightbox" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd()">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="">
+  </div>
+
+  <script>
+    const images = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg'];
+    let current = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(index) {
+      current = index;
+      lightboxImg.src = images[current];
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    let startX = 0;
+    function touchStart(e) {
+      startX = e.touches[0].clientX;
+    }
+    function touchMove(e) {
+      let touchX = e.touches[0].clientX;
+      if (startX - touchX > 50) {
+        current = (current + 1) % images.length;
+        lightboxImg.src = images[current];
+        startX = touchX;
+      } else if (touchX - startX > 50) {
+        current = (current - 1 + images.length) % images.length;
+        lightboxImg.src = images[current];
+        startX = touchX;
+      }
+    }
+    function touchEnd() {
+      startX = 0;
+    }
+  </script>
+
+</body>
+</html>
