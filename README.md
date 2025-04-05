@@ -1,2 +1,2 @@
 # thomas-barton.de
-Bsrton Photography Webseite
+Barton Photography Webseite
