@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thomas R. Barton – Fotogalerie</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -12,60 +12,73 @@
       background-color: #f0f0f0;
       color: #333;
     }
+
     header {
       background-color: white;
       padding: 4rem 1rem 2rem;
       text-align: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     }
+
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
       margin: 0;
       color: #111;
     }
+
     header p {
       font-size: 1.2rem;
       color: #666;
       margin-top: 0.5rem;
     }
+
     .gallery {
-      max-width: 800px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 2rem 1rem;
       display: grid;
-      gap: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
+
     .gallery img {
       width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       cursor: pointer;
+      transition: transform 0.3s;
     }
+
     .gallery img:hover {
-      transform: scale(1.01);
+      transform: scale(1.02);
     }
+
     .lightbox {
       display: none;
       position: fixed;
       z-index: 1000;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0, 0, 0, 0.9);
       align-items: center;
       justify-content: center;
     }
+
     .lightbox.active {
       display: flex;
     }
+
     .lightbox img {
       max-width: 90%;
       max-height: 80%;
       border-radius: 10px;
     }
+
     .close-btn {
       position: absolute;
       top: 20px;
@@ -73,6 +86,25 @@
       color: white;
       font-size: 30px;
       cursor: pointer;
+    }
+
+    footer {
+      background-color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.05);
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    footer a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -84,25 +116,36 @@
   </header>
 
   <main class="gallery">
-    <img src="IMG_1106-Bearbeitet.jpg" alt="Foto 1" onclick="openLightbox(0)">
-    <img src="IMG_3512.jpg" alt="Foto 2" onclick="openLightbox(1)">
-    <img src="kaleidoscope-by-thomas-barton.jpg" alt="Foto 3" onclick="openLightbox(2)">
+    <img src="thumb1.jpg" data-full="IMG_1106-Bearbeitet.jpg" alt="Foto 1" onclick="openLightbox(this)" />
+    <img src="thumb2.jpg" data-full="IMG_3512.jpg" alt="Foto 2" onclick="openLightbox(this)" />
+    <img src="thumb3.jpg" data-full="kaleidoscope-by-thomas-barton.jpg" alt="Foto 3" onclick="openLightbox(this)" />
+    <img src="thumb4.jpg" data-full="original4.jpg" alt="Foto 4" onclick="openLightbox(this)" />
+    <img src="thumb5.jpg" data-full="original5.jpg" alt="Foto 5" onclick="openLightbox(this)" />
+    <img src="thumb6.jpg" data-full="original6.jpg" alt="Foto 6" onclick="openLightbox(this)" />
+    <img src="thumb7.jpg" data-full="original7.jpg" alt="Foto 7" onclick="openLightbox(this)" />
+    <img src="thumb8.jpg" data-full="original8.jpg" alt="Foto 8" onclick="openLightbox(this)" />
+    <img src="thumb9.jpg" data-full="original9.jpg" alt="Foto 9" onclick="openLightbox(this)" />
   </main>
 
   <div class="lightbox" id="lightbox" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd()">
     <span class="close-btn" onclick="closeLightbox()">&times;</span>
-    <img id="lightbox-img" src="">
+    <img id="lightbox-img" src="" />
   </div>
 
+  <footer>
+    <p>
+      <a href="impressum.html" target="_blank" rel="noopener noreferrer">Impressum</a> |
+      <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>
+    </p>
+  </footer>
+
   <script>
-    const images = ['IMG_1106-Bearbeitet.jpg', 'IMG_3512.jpg', 'kaleidoscope-by-thomas-barton.jpg'];
-    let current = 0;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
-    function openLightbox(index) {
-      current = index;
-      lightboxImg.src = images[current];
+    function openLightbox(element) {
+      const fullImage = element.getAttribute('data-full');
+      lightboxImg.src = fullImage;
       lightbox.classList.add('active');
     }
 
@@ -114,47 +157,20 @@
     function touchStart(e) {
       startX = e.touches[0].clientX;
     }
+
     function touchMove(e) {
       let touchX = e.touches[0].clientX;
       if (startX - touchX > 50) {
-        current = (current + 1) % images.length;
-        lightboxImg.src = images[current];
-        startX = touchX;
+        // Swipe left (optional)
       } else if (touchX - startX > 50) {
-        current = (current - 1 + images.length) % images.length;
-        lightboxImg.src = images[current];
-        startX = touchX;
+        // Swipe right (optional)
       }
     }
+
     function touchEnd() {
       startX = 0;
     }
   </script>
-<footer>
-  <p>
-    <a href="impressum.html" target="_blank" rel="noopener noreferrer">Impressum</a> | 
-    <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>
-  </p>
-</footer>
 
-<style>
-  footer {
-    background-color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-    box-shadow: 0 -1px 4px rgba(0,0,0,0.05);
-    font-size: 0.9rem;
-    color: #555;
-  }
-  footer a {
-    color: #333;
-    text-decoration: none;
-    margin: 0 0.5rem;
-  }
-  footer a:hover {
-    text-decoration: underline;
- 
-    }
-  </style>
 </body>
 </html>
