@@ -1,29 +1,108 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Privacy Policy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutzerklärung – Thomas R. Barton</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
     body {
+      margin: 0;
       font-family: 'Open Sans', sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 4rem 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 90px;
+      max-width: 100%;
+    }
+
+    .header-text {
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    main {
       max-width: 800px;
       margin: 2rem auto;
       padding: 1rem;
       line-height: 1.6;
-      color: #333;
     }
+
     h1 {
       font-family: 'Playfair Display', serif;
+    }
+
+    footer {
+      background-color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.05);
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    footer a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
-  <p>This website is solely intended for the presentation of private photographs and does not collect any personal data.</p>
 
-  <p>No cookies are set, and no tracking services are used.</p>
+  <header>
+    <div class="header-container">
+      <img src="logo.png" alt="Logo Thomas R. Barton" class="logo" />
+      <div class="header-text">
+        <h1>Thomas R. Barton</h1>
+        <p>Fotograf aus Frankfurt am Main</p>
+      </div>
+    </div>
+  </header>
 
-  <p>If you have any questions regarding data protection, you can contact me at:
-  <a href="mailto:info@thomas-barton.de">infoatthomas-barton.de</a></p>
+  <main>
+    <h1>Privacy Policy</h1>
+    <p>This website is solely intended for the presentation of private photographs and does not collect any personal data.</p>
+
+    <p>No cookies are set, and no tracking services are used.</p>
+
+    <p>If you have any questions regarding data protection, you can contact me at:<br>
+    <a href="mailto:info@thomas-barton.de">info@thomas-barton.de</a></p>
+  </main>
+
+  <footer>
+    <p>
+      <a href="impressum.html" target="_blank" rel="noopener noreferrer">Impressum</a> |
+      <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>
+    </p>
+  </footer>
+
 </body>
 </html>
