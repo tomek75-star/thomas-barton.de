@@ -204,10 +204,11 @@
     let currentIndex = 0;
 
     function openLightbox(element) {
-      const fullImage = element.getAttribute('data-full');
-      lightboxImg.src = fullImage;
-      lightbox.classList.add('active');
-      currentIndex = Array.from(images).indexOf(element);
+  const fullImage = element.getAttribute('data-full');
+  lightboxImg.src = fullImage;
+  lightbox.classList.add('active');
+  currentIndex = Array.from(images).indexOf(element);
+  history.pushState({ lightbox: true }, '', '#lightbox');
     }
 
     function closeLightbox() {
