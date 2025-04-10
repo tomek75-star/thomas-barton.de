@@ -198,47 +198,60 @@
   </footer>
 
   <script>
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const images = document.querySelectorAll('.gallery img');
-    let currentIndex = 0;
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const images = document.querySelectorAll('.gallery img');
+  let currentIndex = 0;
 
-    function openLightbox(element) {
-  const fullImage = element.getAttribute('data-full');
-  lightboxImg.src = fullImage;
-  lightbox.classList.add('active');
-  currentIndex = Array.from(images).indexOf(element);
-  history.pushState({ lightbox: true }, '', '#lightbox');
-    }
+  function openLightbox(element) {
+    const fullImage = element.getAttribute('data-full');
+    lightboxImg.src = fullImage;
+    lightbox.classList.add('active');
+    currentIndex = Array.from(images).indexOf(element);
+    history.pushState({ lightbox: true }, '', '#lightbox');
+  }
 
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-    }
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    history.pushState({}, '', window.location.pathname);
+  }
 
-    let startX = 0;
-    function touchStart(e) {
-      startX = e.touches[0].clientX;
-    }
+  // Touchsteuerung für Wischen (links/rechts)
+  let startX = 0;
 
-    function touchMove(e) {
-      if (!startX) return;
-      const touchX = e.touches[0].clientX;
-      const diff = startX - touchX;
+  function touchStart(e) {
+    startX = e.touches[0].clientX;
+  }
 
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          currentIndex = (currentIndex + 1) % images.length;
-        } else {
-          currentIndex = (currentIndex - 1 + images.length) % images.length;
-        }
-        lightboxImg.src = images[currentIndex].getAttribute('data-full');
-        startX = 0;
+  function touchMove(e) {
+    if (!startX) return;
+    const touchX = e.touches[0].clientX;
+    const diff = startX - touchX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Wisch nach links → nächstes Bild
+        currentIndex = (currentIndex + 1) % images.length;
+      } else {
+        // Wisch nach rechts → vorheriges Bild
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
       }
-    }
-
-    function touchEnd() {
+      lightboxImg.src = images[currentIndex].getAttribute('data-full');
       startX = 0;
     }
-  </script>
+  }
+
+  function touchEnd() {
+    startX = 0;
+  }
+
+  // Schließen der Lightbox bei „Zurück“-Taste im Browser
+  window.addEventListener('popstate', () => {
+    if (window.location.hash !== '#lightbox') {
+      closeLightbox();
+    }
+  });
+</script>
+
 </body>
 </html>
