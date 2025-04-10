@@ -104,14 +104,19 @@
     }
 
     .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 60px;
-      color: #333;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 1001;
-    }
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: #333;
+  font-size: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  z-index: 1100;
+  cursor: pointer;
+  line-height: 1;
+}
+
 
     @media (max-width: 600px) {
       .close-btn {
@@ -184,10 +189,17 @@
     <img src="thumb_gradasee.jpg" data-full="lightbox_gradasee.JPEG" alt="Foto 9" onclick="openLightbox(this)" />
   </main>
 
-  <div class="lightbox" id="lightbox" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd()">
-    <span class="close-btn" onclick="closeLightbox()">&times;</span>
-    <img id="lightbox-img" src="" />
-  </div>
+ <div class="lightbox" id="lightbox">
+  <span class="close-btn" onclick="closeLightbox()">&times;</span>
+  <img
+    id="lightbox-img"
+    src=""
+    ontouchstart="touchStart(event)"
+    ontouchmove="touchMove(event)"
+    ontouchend="touchEnd()"
+  />
+</div>
+
 
   <footer>
     <p>&copy; 2025 Barton Photography</p>
