@@ -36,12 +36,7 @@
     }
 
     .header-text {
-      max-width: 360px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      text-align: left;
     }
 
     header h1 {
@@ -60,6 +55,11 @@
     @media (max-width: 600px) {
       .header-container {
         flex-direction: column;
+        text-align: center;
+      }
+
+      .header-text {
+        text-align: center;
       }
 
       header h1 {
@@ -124,7 +124,7 @@
     </p>
 
     <p><strong>Contact:</strong><br />
-      E-Mail: <a href="mailto:info@thomas-barton.de">info@thomas-barton.de</a>
+      E-Mail: info(at)thomas-barton.de
     </p>
 
     <p>All photos published on www.thomas-barton.de are protected by copyright. Any use by persons other than the copyright holder is strictly prohibited.</p>
@@ -132,7 +132,13 @@
 
   <footer>
     <p>
-      <a href="index.html">Home</a>
+      <a href="index.html">Home</a> |
+      <a href="https://pixelfed.de/DEIN_USERNAME" target="_blank" rel="noopener noreferrer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Pixelfed_logo.svg/24px-Pixelfed_logo.svg.png"
+             alt="Pixelfed Logo"
+             style="height: 18px; vertical-align: middle; margin-right: 4px;" />
+        Follow me on Pixelfed
+      </a>
     </p>
   </footer>
 
